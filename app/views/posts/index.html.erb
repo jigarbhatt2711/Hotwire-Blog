@@ -3,9 +3,26 @@
 <% content_for :title, "Posts" %>
 
 <h1>Hotwire Blog</h1>
+<h1>⚡ Hotwire Blog</h1>
 
-<%= turbo_frame_tag "posts" do %>
-  <div class="row">
+<div class="row mt-4">
+
+  <%# LEFT — Form column %>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body">
+        <h5>✍️ New Post</h5>
+
+        <%# ✅ id="post_form" — turbo stream target %>
+        <div id="post_form">
+          <%= render "form", post: Post.new %>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+  <div class="row" id="posts_list">
     <% @posts.each do |post| %>
       <%= render post %>
       <p>
@@ -16,6 +33,6 @@
       </p>
     <% end %>
   </div>
-<% end %>
+  </div>
 
 <%= link_to "New post", new_post_path %>

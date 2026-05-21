@@ -3,7 +3,7 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.order(updated_at: :desc)
   end
 
   # GET /posts/1 or /posts/1.json
@@ -25,9 +25,17 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
+        format.turbo_stream
         format.html { redirect_to posts_path, notice: "Post was successfully created." }
         format.json { render :show, status: :created, location: @post }
       else
+        # ✅ Validation error
+        format.turbo_stream {
+          render turbo_stream:
+            turbo_stream.update("post_form",
+              partial: "form",
+              locals: { post: @post })
+        }
         format.html { render :new, status: :unprocessable_content }
         format.json { render json: @post.errors, status: :unprocessable_content }
       end
