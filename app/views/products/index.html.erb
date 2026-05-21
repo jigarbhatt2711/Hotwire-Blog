@@ -1,0 +1,19 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Products" %>
+
+<h1>Products</h1>
+
+<div id="products">
+  <% @products.each do |product| %>
+    <%= render product %>
+    <p>
+      <%= link_to "Show this product", product %>
+    </p>
+    <p>
+      <%= link_to "Edit this product", edit_product_path(product), data: { turbo_frame: dom_id(product) } %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New product", new_product_path, data: { turbo_frame: "new_product_form" } %>

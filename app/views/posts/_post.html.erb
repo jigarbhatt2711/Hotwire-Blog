@@ -1,17 +1,21 @@
-<div id="<%= dom_id post %>">
-  <div>
-    <strong>Title:</strong>
-    <%= post.title %>
-  </div>
+<%= turbo_frame_tag dom_id(post) do %>
+    <div>
+      <strong>Title:</strong>
+      <%= post.title %>
+    </div>
 
-  <div>
-    <strong>Content:</strong>
-    <%= post.content %>
-  </div>
+    <div>
+      <strong>Content:</strong>
+      <%= truncate(post.content, length: 100) %>
+    </div>
 
-  <div>
-    <strong>Author:</strong>
-    <%= post.author %>
-  </div>
+    <div>
+      <strong>Author:</strong>
+      <%= post.author %>
+    </div>
 
-</div>
+    <div>
+      <strong>Created On:</strong>
+      <%= time_ago_in_words(post.created_at) %> ago
+    </div>
+<% end %>

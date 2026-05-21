@@ -2,15 +2,20 @@
 
 <% content_for :title, "Posts" %>
 
-<h1>Posts</h1>
+<h1>Hotwire Blog</h1>
 
-<div id="posts">
-  <% @posts.each do |post| %>
-    <%= render post %>
-    <p>
-      <%= link_to "Show this post", post %>
-    </p>
-  <% end %>
-</div>
+<%= turbo_frame_tag "posts" do %>
+  <div class="row">
+    <% @posts.each do |post| %>
+      <%= render post %>
+      <p>
+        <%= link_to "Show this post", post %>
+      </p>
+      <p>
+        <%= link_to "Edit this post", edit_post_path(post), data: { turbo_frame: dom_id(post) } %>
+      </p>
+    <% end %>
+  </div>
+<% end %>
 
 <%= link_to "New post", new_post_path %>
