@@ -21,11 +21,15 @@
     </div>
   </div>
   <div class="col-md-8">
-  <div class="row" id="posts_list">
-    <% @posts.each do |post| %>
-      <%= render post %>
-    <% end %>
-  </div>
+    <%# ✅ Subscribe to posts channel %>
+    <%= turbo_stream_from "posts" %>
+    
+    <%# Posts list — target for broadcasts %>
+    <div class="row" id="posts_list">
+      <% @posts.each do |post| %>
+        <%= render post %>
+      <% end %>
+    </div>
   </div>
 
 <%= link_to "New post", new_post_path %>
