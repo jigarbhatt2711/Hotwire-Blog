@@ -1,7 +1,7 @@
 class Post < ApplicationRecord
   validates :title, :content, :author, presence: true
 
-    # ✅ One line does everything!
+  # ✅ One line does everything!
   broadcasts_to ->(post) { "posts" },
     inserts_by: :prepend,
     target: "posts_list"
