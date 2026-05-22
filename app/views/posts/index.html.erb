@@ -2,7 +2,6 @@
 
 <% content_for :title, "Posts" %>
 
-<h1>Hotwire Blog</h1>
 <h1>⚡ Hotwire Blog</h1>
 
 <div class="row mt-4">
@@ -25,12 +24,6 @@
   <div class="row" id="posts_list">
     <% @posts.each do |post| %>
       <%= render post %>
-      <p>
-        <%= link_to "Show this post", post %>
-      </p>
-      <p>
-        <%= link_to "Edit this post", edit_post_path(post), data: { turbo_frame: dom_id(post) } %>
-      </p>
     <% end %>
   </div>
   </div>
